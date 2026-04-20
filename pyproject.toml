@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pydantic-x"
+version = "0.1.0"
+description = "Pydantic-X: faster validation helpers, schema versioning, and sanitizers for Pydantic v2."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name="Pydantic-X Contributors"}]
+keywords = ["pydantic", "validation", "schema", "sanitizer", "jsonschema", "fastapi"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Libraries",
+]
+
+dependencies = [
+  "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0.0",
+  "build>=1.0.0",
+  "twine>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourname/pydantic-x"
+Repository = "https://github.com/yourname/pydantic-x"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pydanticx*"]

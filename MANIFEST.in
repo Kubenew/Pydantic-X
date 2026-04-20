@@ -1,0 +1,4 @@
+include README.md
+include LICENSE
+recursive-include pydanticx *.py
+recursive-include tests *.py
