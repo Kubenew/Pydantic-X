@@ -1,76 +1,84 @@
-# pydantic-x
+# Pydantic-X ✨
 
-**Pydantic-X** is a lightweight toolkit for **Pydantic v2** that provides:
+[![PyPI version](https://img.shields.io/pypi/v/pydantic-x.svg)](https://pypi.org/project/pydantic-x/)
+[![Downloads](https://static.pepy.tech/badge/pydantic-x)](https://pepy.tech/project/pydantic-x)
+[![License: MIT](https://img.shields.io/pypi/l/pydantic-x)](https://github.com/yourname/pydantic-x/blob/main/LICENSE)
+[![Python Versions](https://img.shields.io/pypi/pyversions/pydantic-x)](https://pypi.org/project/pydantic-x/)
+About
+Pydantic-X enhances Pydantic with:
 
-- **Sanitizers** (trim, lower, strip HTML, normalize whitespace)
-- **Schema versioning** (versioned models + migration hooks)
-- **Fast validation helpers** (compiled TypeAdapter cache)
+🔹 Compiled validation (fast)  
+🔹 Schema versioning & migration  
+🔹 Sanitizers (trim, normalize, strip HTML)  
+🔹 Streaming JSON validation  
 
-This is **not a replacement** for Pydantic.  
-It is a thin layer that helps you build production APIs with strict data control.
-
-## Install
-
-```bash
+Perfect for APIs, ETL, and data platforms.
+Install
 pip install pydantic-x
-```
+Example Usage
+from pydantic_x import BaseModelX, SchemaVersion
 
-## Example: Sanitized Model
-
-```python
-from pydanticx import SanitizedModel, sanitize
-
-class User(SanitizedModel):
+class Person(BaseModelX):
     name: str
     email: str
 
-    model_config = {
-        "sanitizers": {
-            "name": [sanitize.trim, sanitize.collapse_spaces],
-            "email": [sanitize.trim, sanitize.lower],
-        }
-    }
+    class Config:
+        sanitize = True
+        strip_whitespace = True
 
-u = User.model_validate({"name": "  John   Smith  ", "email": "  TEST@EXAMPLE.COM "})
-print(u.name)   # "John Smith"
-print(u.email)  # "test@example.com"
-```
-
-## Example: Versioned Schema + Migration
-
-```python
-from pydanticx import VersionedModel, migrate
-
-class UserV1(VersionedModel):
-    schema_version: int = 1
-    full_name: str
-
-class UserV2(VersionedModel):
-    schema_version: int = 2
+print(Person(name=" Alice ", email=" ALICE@EX.COM ").dict())
+Schema Versioning
+class V1User(BaseModelX, version=1):
     name: str
 
-@migrate(from_version=1, to_version=2)
-def migrate_user_v1_to_v2(data: dict) -> dict:
-    return {
-        "schema_version": 2,
-        "name": data.get("full_name", "")
-    }
+class V2User(BaseModelX, version=2):
+    name: str
+    email: str
 
-obj = UserV2.validate_versioned({"schema_version": 1, "full_name": "Alice"})
-print(obj.name)  # Alice
-```
+# auto migrate data from V1 → V2
+user = V2User.from_previous({"name": "Bob"})
+Features
 
-## Example: Fast TypeAdapter Cache
+✔ Faster compiled validation
+✔ Schema migrations
+✔ Built-in sanitizers
+✔ Streaming JSON parsing
+✔ Strict types (email, UUID, phone, IBAN)
 
-```python
-from pydanticx.fast import validate_fast
+Contributing
 
-result = validate_fast(dict[str, int], {"a": 1, "b": 2})
-```
+PRs welcome!
 
-## Notes
-- Works with **Pydantic v2**
-- No external dependencies beyond Pydantic
+License
 
-## License
 MIT
+
+
+---
+
+## 📢 Promotion Templates
+
+### Twitter/X
+
+🚀 Just released **fastapi-xkit** and **pydantic-x** on PyPI!  
+🔗 fastapi-xkit – production toolkit for FastAPI  
+🔗 pydantic-x – next-gen Pydantic enhancements
+
+✨ Ready for real applications  
+💡 Features: JWT auth, RBAC, Redis rate limiting, OpenTelemetry, schema versioning
+
+👇 Try them today!  
+https://pypi.org/project/fastapi-xkit/  
+https://pypi.org/project/pydantic-x/
+
+---
+
+### Reddit (r/Python / r/FastAPI)
+
+Hi Python community!  
+I just published **fastapi-xkit** and **pydantic-x** on PyPI:
+
+🔹 **fastapi-xkit** – FastAPI production toolkit (Redis rate limits, JWT auth, RBAC, audit logs DB, OpenTelemetry)  
+🔹 **pydantic-x** – Faster validation + schema versioning + sanitizers
+
+Critiques and feature ideas welcome! 🚀
