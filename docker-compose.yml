@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  pydanticx_demo:
+    image: python:3.11-slim
+    container_name: pydanticx_demo
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: bash -c "pip install -U pip && pip install -e . && python examples/demo_full.py"

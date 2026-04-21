@@ -32,9 +32,6 @@ class UserV2(BaseModelX, version=2):
 
     @classmethod
     def migrate(cls, old_data: dict, old_version: int) -> dict:
-        """
-        Custom migration logic.
-        """
         if old_version == 1:
             old_data["email"] = "migrated@example.com"
         return old_data
