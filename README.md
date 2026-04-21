@@ -6,6 +6,7 @@
 [![Python Versions](https://img.shields.io/pypi/pyversions/pydantic-x)](https://pypi.org/project/pydantic-x/)
 
  About
+ 
 Pydantic-X enhances Pydantic with:
 
 🔹 Compiled validation (fast)  
