@@ -4,7 +4,8 @@
 [![Downloads](https://static.pepy.tech/badge/pydantic-x)](https://pepy.tech/project/pydantic-x)
 [![License: MIT](https://img.shields.io/pypi/l/pydantic-x)](https://github.com/yourname/pydantic-x/blob/main/LICENSE)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pydantic-x)](https://pypi.org/project/pydantic-x/)
-About
+
+ About
 Pydantic-X enhances Pydantic with:
 
 🔹 Compiled validation (fast)  
